@@ -1,0 +1,37 @@
+server:
+  # 该后台项目服务将启动的端口
+  port: 9002
+
+jwt:
+  header: "Authorization"   #token 返回头部
+  tokenPrefix: "Bearer"     #token 前缀
+  secret: "start-from-sdu"  # 密钥
+  expire: 3600000          #token有效时间
+
+#mybatis配置
+mybatis:
+  # 映射文件所在路径
+  mapper-locations: classpath:mapper/*.xml
+  # pojo类所在包路径
+  type-aliases-package: edu.sdu.start.pojo
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl   #用于控制台打印sql语句
+    map-underscore-to-camel-case: true # 数据库名自动匹配java实体类驼峰命名
+    call-setters-on-nulls: true # 记录中包含null的字段也返回
+
+spring:
+  datasource:
+    #有的mysql如5.0 下面必须改成com.mysql.jdbc.Driver
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://rm-bp16h2764sza756i11o.mysql.rds.aliyuncs.com:3306/startdb?characterEncoding=UTF-8
+    username: root
+    password: Chenziyan123
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+
+logging:
+  file:
+    path: ./logs
+  level:
+    edu.sdu: debug
